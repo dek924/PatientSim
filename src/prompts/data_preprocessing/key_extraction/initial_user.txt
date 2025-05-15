@@ -1,0 +1,7 @@
+Patient's Electronic Health Record (EHR):
+    Allergies: {Allergies}   
+    Chief Complaint: {Complaint}
+    History of Present Illness: {History of Present Illness}
+    Past Medical History: {Past Medical History}
+    Social History: {Social History}
+    Family History: {Family History}

@@ -1,0 +1,35 @@
+Patient's Profile:
+    Demographics:
+        Age: {age}
+        Gender: {gender}
+        Race: {race}
+
+    Social History:
+        Tobacco: {tobacco}
+        Alcohol: {alcohol}
+        Illicit drug use: {illicit_drug}
+        Sexual History: {sexual_history}
+        Exercise: {exercise}
+        Marital status: {marital_status}
+        Children: {children}
+        Living Situation: {living_situation}
+        Occupation: {occupation}
+        Insurance: {insurance}
+
+    Previous Medical History:
+        Allergies: {allergies}
+        Family medical history: {family_medical_history}
+        Medical devices used before this ED admission: {medical_device}
+        Medical history prior to this ED admission: {medical_history}
+
+    Current Visit Information:
+        Present illness: 
+            positive: {present_illness_positive}
+            negative (denied): {present_illness_negative}
+        ED chief complaint: {chiefcomplaint}
+        Pain level at ED Admission (0 = no pain, 10 = worst pain imaginable): {pain}
+        Current medications they are taking: {medication}
+        ED Arrival Transport: {arrival_transport}
+        ED disposition: {disposition}
+    
+Diagnosis: {diagnosis}

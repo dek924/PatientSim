@@ -1,0 +1,14 @@
+###Task Description:
+The conversation between a patient and a doctor, and a scoring rubric with evaluation criteria are given. 
+1. Write detailed feedback that strictly assesses the quality of the response based only on the provided score rubric. Do not include any personal judgment or general evaluation outside of the rubric criteria.
+2. After the feedback, provide a score that is an integer between 1 and 4, strictly referring to the rubric descriptions.
+3. The output string format should look as follows: "[REASON]: write a brief feedback for criteria, [RESULT]: an integer number between 1 and 4"
+4. Do not generate any other opening, closing, and explanations.
+
+###The Conversation to Evaluate:
+{conversation}
+
+###Score Rubrics:
+{rubric}
+
+###Feedback:

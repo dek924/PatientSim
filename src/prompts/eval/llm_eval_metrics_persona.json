@@ -1,0 +1,37 @@
+{
+    "Personality": {
+        "criteria": "The simulated patient's personality is consistently and accurately reflected during the interaction.",
+        "score1_description": "The patient's responses fail to reflect the expected personality, completely deviating from the described characteristics.",
+        "score2_description": "The patient's responses inconsistently portray the intended personality, with frequent deviations from the described characteristics.",
+        "score3_description": "The patient's responses generally capture the intended personality, with minor inconsistencies that do not significantly affect the portrayal.",
+        "score4_description": "The patient's responses consistently and accurately reflect the intended personality, aligning fully with the described characteristics and style."
+    },
+    "CEFR": {
+        "criteria": "The patient's language use (vocabulary, grammar, fluency) is appropriate for their assigned CEFR level.",
+        "score1_description": "The patient's language use fails to match the assigned CEFR level, deviating entirely from the expected proficiency in vocabulary, grammar, and fluency.",
+        "score2_description": "The patient’s language use inconsistently aligns with the assigned CEFR level, with frequent deviations in vocabulary, grammar, or fluency that mismatch the expected proficiency.",
+        "score3_description": "The patient’s language use generally matches the assigned CEFR level, with minor errors in vocabulary, grammar, or fluency that align with the level’s communicative expectations.",
+        "score4_description": "The patient’s language use fully reflects the assigned CEFR level, consistently showing the expected proficiency in vocabulary, grammar, and fluency."
+    },
+    "Recall_level": {
+        "criteria": "The patient's ability to recall medical and personal information is consistent with their assigned recall level (e.g., low or high).",
+        "score1_description": "The patient's recall fails to match the assigned level, with significant deviations that make the portrayal implausible.",
+        "score2_description": "The patient’s recall inconsistently reflects the assigned level, with frequent deviations in memory or accuracy that mismatch the expected behavior.",
+        "score3_description": "The patient’s recall generally matches the assigned level, with minor lapses in memory or accuracy that align with the expected recall behavior.",
+        "score4_description": "The patient’s recall fully reflects the assigned level, consistently showing limited or detailed memory as appropriate."
+    },
+    "Dazed_level": {
+        "criteria": "The patient's coherence and clarity of thought match the assigned level of dazedness.",
+        "score1_description": "The patient’s responses fail to reflect the assigned dazedness level, with significant deviations that render the portrayal implausible.",
+        "score2_description": "The patient’s responses inconsistently reflect the assigned dazedness level, with frequent mismatches in coherence or clarity.",
+        "score3_description": "The patient’s responses generally align with the assigned dazedness level, with minor inconsistencies in coherence or clarity that are consistent with the expected dazed behavior.",
+        "score4_description": "The patient’s responses fully reflect the assigned dazedness level, demonstrating the appropriate degree of disorganization or clarity throughout the interaction."
+    },
+    "Realism_w_Profile": {
+        "criteria": "The patient's overall communication style matched what I would expect from a real ED patient.",
+        "score1_description": "The patient's responses are highly unnatural and unrealistic, with speech patterns, phrasing, or behaviors entirely uncharacteristic of a real ED patient with the given persona, making the conversation feel artificial and disconnected from the persona.",
+        "score2_description": "The patient's responses are somewhat natural but contain noticeable unrealistic elements, such as awkward phrasing or behaviors that only partially align with the given persona, resulting in a moderately authentic dialogue.",
+        "score3_description": "The patient's responses are mostly natural and realistic, closely aligning with the given persona, with only minor inconsistencies or awkward phrases that do not significantly detract from the realism of an ED patient with that persona.",
+        "score4_description": "The patient's responses are entirely natural and realistic, perfectly mirroring the communication style of a real ED patient with the given persona, feeling fully authentic and convincing."
+    }
+}

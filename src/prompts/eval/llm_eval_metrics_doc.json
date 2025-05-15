@@ -1,0 +1,58 @@
+{
+    "Presenting_Complaint": {
+        "criteria": "To what extent did the doctor address the PRESENTING COMPLAINT?",
+        "score1_description": "Appears unsystematic, unpractised, and unprofessional.",
+        "score2_description": "Identifies the complaint but misses relevant details or lacks clear structure.",
+        "score3_description": "Addresses the complaint clearly and logically with minor omissions.",
+        "score4_description": "Addresses presenting complaint in a thorough, systematic, fluent and professional manner."
+    },
+    "Systems_Review": {
+        "criteria": "To what extent did the doctor address the SYSTEMS REVIEW?",
+        "score1_description": "Appears unsystematic, unpractised, and unprofessional.",
+        "score2_description": "Attempts a systems review but misses key elements or lacks flow.",
+        "score3_description": "Performs a mostly appropriate systems review with clear structure and minor gaps.",
+        "score4_description": "Addresses systems review in a thorough, systematic, fluent and professional manner."
+    },
+    "Past_Medical_History": {
+        "criteria": "To what extent did the doctor address the PAST MEDICAL HISTORY?",
+        "score1_description": "Appears unsystematic, unpractised, and unprofessional.",
+        "score2_description": "Collects some relevant history but misses key details or lacks structure.",
+        "score3_description": "Addresses past medical history clearly with minor omissions or slight disorganization.",
+        "score4_description": "Addresses past medical history in a thorough, systematic, fluent and professional manner."
+    },
+    "Family_History": {
+        "criteria": "To what extent did the doctor address the FAMILY HISTORY?",
+        "score1_description": "Appears unsystematic, unpractised, and unprofessional.",
+        "score2_description": "Gathers some family history but misses significant details or lacks clear structure.",
+        "score3_description": "Addresses family history logically with minor gaps or slight lack of focus.",
+        "score4_description": "Addresses family history in a thorough, systematic, fluent and professional manner."
+    },
+    "Medication_History": {
+        "criteria": "To what extent did the doctor address the MEDICATION HISTORY?",
+        "score1_description": "Appears unsystematic, unpractised, and unprofessional.",
+        "score2_description": "Collects partial medication history but omits key details or lacks structure.",
+        "score3_description": "Addresses medication history clearly with minor omissions or slight disorganization.",
+        "score4_description": "Addresses medication history in a thorough, systematic, fluent and professional manner."
+    },
+    "Managing_Patient_Concerns": {
+        "criteria": "To what extent did the doctor seek, detect, acknowledge and attempt to address the patient's concerns?",
+        "score1_description": "Overlooks patient's concerns.",
+        "score2_description": "Detects some concerns but fails to acknowledge or address them adequately.",
+        "score3_description": "Seeks and acknowledges most concerns, addressing them with minor gaps.",
+        "score4_description": "Seeks, detects, acknowledges and attempts to address patient's concerns."
+    },
+    "Empathy": {
+        "criteria": "How empathic was the doctor?",
+        "score1_description": "Not at all empathic.",
+        "score2_description": "Displays limited empathy, with occasional sensitivity but inconsistent warmth.",
+        "score3_description": "Demonstrates empathy in most interactions, with minor lapses in sensitivity.",
+        "score4_description": "Extremely empathic."
+    },
+    "Maintaining_Patient_Welfare": {
+        "criteria": "To what extent did the doctor maintain the patient's welfare?",
+        "score1_description": "Causes patient physical or emotional discomfort AND kindises patient safety.",
+        "score2_description": "Maintains welfare inconsistently, with some lapses in respect or sensitivity.",
+        "score3_description": "Maintains patient welfare respectfully, with minor lapses in ensuring comfort or dignity.",
+        "score4_description": "Treats patient respectfully and sensitively and ensures comfort, safety and dignity."
+    }
+}

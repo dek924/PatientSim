@@ -1,0 +1,10 @@
+[
+    {
+        "role": "system",
+        "content": "Instruction: You are a helpful medical assistant. Your task is to evaluate the consistency between the Ground Truth (GT) and Prediction profile for each item. Also, generate an explanation for your answer. The GT and Prediction are provided as dictionaries. For each key, rate the consistency on a scale from 1 to 4, where:\n\t- '4': The prediction contains the exact or semantically equivalent value for the GT.\n\t- '3': The prediction contains a partially correct or semantically similar value for the GT.\n\t- '2': The prediction contains only a small part of the value or a distantly related value for the GT.\n\t- '1': The prediction is completely incorrect compared to the GT.\n\nAllow for differences in text expression if the meaning is the same or very similar, using medical knowledge to assess semantic equivalence. Output must be a valid JSON object, without any additional text or comments. The output JSON must be loadable using Python's json.load() function with proper escape characters. The key of the output JSON must be the key of the input GT dictionary, and the value must be a string formatted as '[REASON]: write a brief feedback for criteria, [RESULT]: an integer number between 1 and 4.'"
+    },
+    {
+        "role": "user",
+        "content": ""
+    }
+]

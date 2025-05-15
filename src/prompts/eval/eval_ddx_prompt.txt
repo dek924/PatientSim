@@ -1,0 +1,8 @@
+Your task is to evaluate whether the true diagnosis is included in the predicted differential diagnoses. 
+The predicted diagnosis can be more specific or detailed than the true diagnosis (e.g., "Small Bowel Obstruction" for "Bowel Obstruction" or "Acute Pyelonephritis" for "Pyelonephritis" is acceptable), but it must not be broader than the ground truth (GT).
+A broader diagnosis (e.g., "Pulmonary problems" for "Pneumonia") is considered incorrect.
+Answer with Y or N only, without further explanation.
+
+Predicted differential diagnoses: {ddx}
+True diagnosis: {ans}
+Answer [Y/N]:

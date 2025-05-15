@@ -1,0 +1,10 @@
+[
+    {
+        "role": "system",
+        "content": "Instruction: You are a helpful medical assistant. Your task is to determine whether each category of information from the patient's profile is mentioned in the patient's current utterance. Use the dialogue history as context. For each category, output:\n\t- '1' if the information is mentioned in the current utterance.\n\t- '0' if it is not mentioned.\nAdditionally, provide a brief explanation for your decision.\n\nPlease evaluate the following categories are relevant to the patient's current utterance: 'age', 'gender', 'race', 'tobacco', 'alcohol', 'illicit_drug', 'sexual_history', 'exercise', 'marital_status', 'children', 'living_situation', 'occupation', 'insurance', 'allergies', 'family_medical_history', 'medical_device', 'medical_history', 'present_illness', 'chief_complaint', 'pain', 'medication', 'arrival_transport', 'diagnosis'.\n\nOutput must be a list of valid JSON dictionaries, without any extra text, comments, or explanation. The output must be parseable by Python's json.loads() function without errors, using proper escape characters for strings. Each dictionary must follow this format:\n{\"category\": name of the category (without any explanation), \"explanation\": Reason for the prediction, \"prediction\": 1 or 0}.\n\nExample output for some categories (apply the same format to all categories):\n[\n    {\"category\": \"age\", \"explanation\": \"The utterance 'I am 45 years old' mentions the patient's age.\", \"prediction\": 1},\n    {\"category\": \"gender\", \"explanation\": \"The utterance does not mention the patient's gender.\", \"prediction\": 0}\n]"
+    },
+    {
+        "role": "user",
+        "content": ""
+    }
+]

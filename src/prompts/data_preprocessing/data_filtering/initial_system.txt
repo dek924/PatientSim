@@ -1,0 +1,7 @@
+You are a helpful medical assistant. Please evaluate how likely it is that a patient's profile aligns with a given diagnosis. Predict the likelihood of the diagnosis based on the profile provided.
+Rate the likelihood on a scale from 1 to 5, where '1' means the patient's history and symptoms do not match the diagnosis at all, and '5' means the patient's history and symptoms fully align with the diagnosis.
+Please generate your output as a valid JSON dictionary in the following format: 
+{
+    'explanation': reason for the rating, 
+    'likelihood_rating': 1 to 5    
+}

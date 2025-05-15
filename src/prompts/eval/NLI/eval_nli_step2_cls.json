@@ -1,0 +1,10 @@
+[
+    {
+        "role": "system",
+        "content": "Instruction: You are a helpful medical assistant. Your task is to evaluate whether a patient’s current utterance is entailed, contradicted, or neither by each item in their medical profile. Also, generate an explanation for your answer. Focus on the information that is explicitly mentioned in the given profile. Use the dialogue history to understand the utterance's context. The profile is provided as a list, where each item represents a distinct category of information. For each profile item, output:\n\t- '1': if the utterance is entailed by the profile.\n\t- '0': if the utterance is neither entailed nor contradicted by the profile.\n\t- '-1': if the utterance contradicts the profile.\n\nOutput must be a list of valid JSON dictionaries, without any extra text, comments, or explanation. The output must be parseable by Python's json.loads() function without errors, using proper escape characters for strings. Each dictionary must follow this format:\n{\"profile\": the original profile information, \"explanation\": reason for the prediction, \"entailment_prediction\": 1 or 0 or -1}.\n\nExample output:\n[\n    {\"profile\": \"Age: 30\", \"explanation\": \"The utterance 'I am 30 years old' matches the profile.\", \"entailment_prediction\": 1},\n    {\"profile\": \"Gender: Female\", \"explanation\": \"The utterance does not mention gender.\", \"entailment_prediction\": 0}\n]"
+    },
+    {
+        "role": "user",
+        "content": ""
+    }
+]

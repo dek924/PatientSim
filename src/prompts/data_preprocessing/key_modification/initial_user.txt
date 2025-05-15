@@ -1,0 +1,26 @@
+Patient's Electronic Health Record (EHR):
+    Age: {age}
+    Gender: {gender}
+    Race: {race}
+    Marital Status: {marital_status}
+    Insurance: {insurance}
+    Medical device: {medical_device}
+    Medical history: {medical_history}
+    Present illness: {present_illness}
+    Family medical history: {family_medical_history}
+
+Patient Profile Template (to complete):
+    {{
+        "demographics": {{
+            "occupation": "{occupation}",
+            "living_situation": "{living_situation}",
+            "children": "{children}"
+        }},
+        "social_history": {{
+            "exercise": "{exercise}",
+            "tobacco": "{tobacco}",
+            "alcohol": "{alcohol}",
+            "illicit_drug": "{illicit_drug}",
+            "sexual_history": "{sexual_history}"
+        }}
+    }}
