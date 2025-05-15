@@ -39,6 +39,12 @@ All these source datasets require a credentialed Physionet credentialing. To acc
     - https://physionet.org/sign-dua/mimic-iv-ed/2.2/
     - https://physionet.org/sign-dua/mimic-iv-note/2.2/
 
+
+### Download
+Download the dataset using the provided link [<a href="https://kaggle.com/datasets/f04fc0f48b1b3677d31006555c5f8bae7766a7384c66ba210f6526bd58d85b79">link</a>]
+Unzip the dataset in the `./src/data/final_data` folder, which is the default path for the PatientSim experiment.
+
+
 ### Data Preprocessing
 After obtaining access, preprocess the data using the following script (with your PhysioNet credentials):
 ```
@@ -53,8 +59,6 @@ export GOOGLE_PROJECT_ID="YOUR_PROJECT_ID"
 ```
 **Note**: While this script mirrors our internal preprocessing, results may vary due to API-based fluctuations. For consistent outcomes, we recommend using the preprocessed dataset available on Kaggle.
 
-### Download
-Download the dataset using the provided link [<a href="https://kaggle.com/datasets/f04fc0f48b1b3677d31006555c5f8bae7766a7384c66ba210f6526bd58d85b79">link</a>]
 
 ## Running the Simulation
 ### API Setup
