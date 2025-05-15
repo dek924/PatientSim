@@ -66,16 +66,6 @@ class PatientAgent:
         }
         self.sentence_limit = json.load(open(os.path.join(self.prompt_dir, "sentence_length_limit.json"), "r"))
 
-        patient_profile['cefr_option'] = patient_profile.pop('cefr')
-        patient_profile['personality_option'] = patient_profile.pop('personality')
-        patient_profile['recall_level_option'] = patient_profile.pop('recall_level')
-        patient_profile['dazed_level_option'] = patient_profile.pop('dazed_level')
-        
-        self.cefr_type = patient_profile["cefr_option"]
-        self.personality_type = patient_profile["personality_option"]
-        self.recall_level_type = patient_profile["recall_level_option"]
-        self.dazed_level_type = patient_profile["dazed_level_option"]
-
         # Set CEFR bias
         cefr_levels = ["A", "B", "C"]
         current_index = cefr_levels.index(self.cefr_type)
