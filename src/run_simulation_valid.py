@@ -214,17 +214,14 @@ def main(args):
     scenario_loader = ScenarioLoaderMIMICIV(args.data_dir, args.data_file_name)
     log_and_print(f"Load Datasets from {args.data_dir}, size: {scenario_loader.num_scenarios}")
 
-    total_correct = 0
-    total_presents = 0
-
     log_and_print(f"""Patient prompt template:\n\t{file_to_string(os.path.join(args.prompt_dir, args.patient_prompt_file + ".txt"))}""")
     log_and_print(f"""Doctor prompt template:\n\t{file_to_string(os.path.join(args.prompt_dir, args.doctor_prompt_file + ".txt"))}""")
 
     # Pipeline for huggingface models
-    for _scenario_id in range(0, min(args.num_scenarios, scenario_loader.num_scenarios)):
+    num_scenarios = min(args.num_scenarios, scenario_loader.num_scenarios) if args.num_scenarios is not None else scenario_loader.num_scenarios
+    for _scenario_id in range(0, num_scenarios):
         # Initialize scenarios
         scenario = scenario_loader.get_scenario(id=_scenario_id)
-        total_presents += 1
 
         # Initialize agents
         patient_agent = PatientAgent(
