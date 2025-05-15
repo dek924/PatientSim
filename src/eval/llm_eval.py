@@ -117,7 +117,7 @@ def main(args):
         # Set save path & save variables
         correct_cnt = 0
         total_ddx_result = {}
-        save_path = os.path.join(result_path, f"{args.moderator}_ddx_{args.trg_agent}_detail.json")
+        save_path = os.path.join(result_path, f"{args.moderator}_ddx_{args.trg_agent}.json")
         assert not os.path.isfile(save_path)
 
         # Start evaluation
