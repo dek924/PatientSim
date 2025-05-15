@@ -34,6 +34,16 @@ def detect_termination(response):
     return all_present or end_flag
 
 
+def process_string(input_string):
+    # Remove content inside parentheses and the parentheses themselves
+    step1 = re.sub(r"\([^)]*\)", "", input_string)
+    # Remove content inside asterisks and the asterisks themselves
+    step2 = re.sub(r"\*\*[^*]*\*\*", "", step1)
+    # Clean up extra spaces caused by the removal
+    result = re.sub(r"\s+", " ", step2).strip()
+    return result
+
+
 def load_config(yaml_file):
     with open(yaml_file, "r") as file:
         config = yaml.safe_load(file)

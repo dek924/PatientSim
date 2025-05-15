@@ -19,39 +19,9 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from tqdm import tqdm
 from copy import deepcopy
 from models import get_response_method, vllm_model_setup, get_answer
-from utils import load_json, load_jsonl, save_to_json, get_profile, file_to_string, set_seed
+from utils import load_json, load_jsonl, save_to_json, get_profile, file_to_string, set_seed, detect_termination, process_string
 from prompts.eval.prompts import ABS_SYSTEM_PROMPT, SCORE_RUBRIC_TEMPLATE, PATIENT_PROFILE_TEMPLATE, PATIENT_PROFILE_TEMPLATE_UTI, PATIENT_PERSONA_TEMPLATE
 
-
-def check_all_patterns_present(text):
-    patterns = [r"1\..*", r"2\..*", r"3\..*", r"4\..*", r"5\..*"]
-    return all(re.search(pattern, text) for pattern in patterns)
-
-
-def detect_termination(response):
-    end_flag = False
-    ddx_key = [
-        "ddx ready:",
-        "my top five differential diagnoses",
-        "my top 5",
-        "here are my top",
-        "[ddx]",
-        "here are some potential concerns we need to consider",
-        "following differential diagnoses",
-    ]
-    all_present = check_all_patterns_present(response)
-    end_flag = any(key.lower() in response.lower() for key in ddx_key)
-    return all_present or end_flag
-
-
-def process_string(input_string):
-    # Remove content inside parentheses and the parentheses themselves
-    step1 = re.sub(r"\([^)]*\)", "", input_string)
-    # Remove content inside asterisks and the asterisks themselves
-    step2 = re.sub(r"\*\*[^*]*\*\*", "", step1)
-    # Clean up extra spaces caused by the removal
-    result = re.sub(r"\s+", " ", step2).strip()
-    return result
 
 
 def process_answer(response, expected_type="dict"):
@@ -373,53 +343,52 @@ def main(args):
             # Logging & save
             save_to_json(total_consistency_eval_result, save_path)
 
-        else:
-            total_consistency_eval_result = load_json(save_path)
-            BERTscore_save_path = os.path.join(result_path, f"{args.moderator}_profile_consistency_BERTscore_{args.trg_agent}.json")
-            LLMscore_save_path = os.path.join(result_path, f"{args.moderator}_profile_consistency_LLMscore_{args.trg_agent}.json")
-            consistency_prompt = load_json(os.path.join(args.prompt_dir, "eval_profile_consistency.json"))
+        total_consistency_eval_result = load_json(save_path)
+        BERTscore_save_path = os.path.join(result_path, f"{args.moderator}_profile_consistency_BERTscore_{args.trg_agent}.json")
+        LLMscore_save_path = os.path.join(result_path, f"{args.moderator}_profile_consistency_LLMscore_{args.trg_agent}.json")
+        consistency_prompt = load_json(os.path.join(args.prompt_dir, "eval_profile_consistency.json"))
 
-            BERT_SIM_result = {}
-            LLM_SIM_result = {}
+        BERT_SIM_result = {}
+        LLM_SIM_result = {}
 
-            if os.path.isfile(BERTscore_save_path):
-                BERT_SIM_result = load_json(BERTscore_save_path)
+        if os.path.isfile(BERTscore_save_path):
+            BERT_SIM_result = load_json(BERTscore_save_path)
 
-            if os.path.isfile(LLMscore_save_path):
-                LLM_SIM_result = load_json(LLMscore_save_path)
+        if os.path.isfile(LLMscore_save_path):
+            LLM_SIM_result = load_json(LLMscore_save_path)
 
-            embedding_model_name = "emilyalsentzer/Bio_ClinicalBERT"
-            tokenizer = AutoTokenizer.from_pretrained(embedding_model_name)
-            embedding_model = AutoModel.from_pretrained(embedding_model_name).to("cuda" if torch.cuda.is_available() else "cpu")
-            for scenario, predict_dict in tqdm(total_consistency_eval_result.items()):
-                profile_data = get_profile(scenario_dict, scenario)
-                predict_dict = flatten_dict_simple(predict_dict)
-                profile_data = {k: v for k, v in profile_data.items() if k in predict_dict.keys()}
-                assert len(set(predict_dict.keys()).difference(profile_data)) == 0
+        embedding_model_name = "emilyalsentzer/Bio_ClinicalBERT"
+        tokenizer = AutoTokenizer.from_pretrained(embedding_model_name)
+        embedding_model = AutoModel.from_pretrained(embedding_model_name).to("cuda" if torch.cuda.is_available() else "cpu")
+        for scenario, predict_dict in tqdm(total_consistency_eval_result.items()):
+            profile_data = get_profile(scenario_dict, scenario)
+            predict_dict = flatten_dict_simple(predict_dict)
+            profile_data = {k: v for k, v in profile_data.items() if k in predict_dict.keys()}
+            assert len(set(predict_dict.keys()).difference(profile_data)) == 0
 
-                if scenario not in BERT_SIM_result:
-                    # BERT Sim
-                    bert_result = {}
-                    cos = nn.CosineSimilarity(dim=1, eps=1e-6)
-                    for eval_key in predict_dict.keys():
-                        if predict_dict[eval_key] != "Not recorded":
-                            bert_result[eval_key] = compute_similarity(tokenizer, embedding_model, str(profile_data[eval_key]), str(predict_dict[eval_key]), cos).item()
-                        else:
-                            bert_result[eval_key] = None
-                    BERT_SIM_result[scenario] = bert_result
+            if scenario not in BERT_SIM_result:
+                # BERT Sim
+                bert_result = {}
+                cos = nn.CosineSimilarity(dim=1, eps=1e-6)
+                for eval_key in predict_dict.keys():
+                    if predict_dict[eval_key] != "Not recorded":
+                        bert_result[eval_key] = compute_similarity(tokenizer, embedding_model, str(profile_data[eval_key]), str(predict_dict[eval_key]), cos).item()
+                    else:
+                        bert_result[eval_key] = None
+                BERT_SIM_result[scenario] = bert_result
 
-                if scenario not in LLM_SIM_result:
-                    # LLM Sim
-                    messages = deepcopy(consistency_prompt)
-                    filtered_predict_dict = {k: v for k, v in predict_dict.items() if v != "Not recorded"}
-                    filtered_profile_data = {k: v for k, v in profile_data.items() if k in filtered_predict_dict}
-                    messages[-1]["content"] = json.dumps({"GT_profile": filtered_profile_data, "Prediction_profile": filtered_predict_dict})
-                    llm_result, _ = get_valid_answer_with_retries(client, messages, model=model, temperature=args.temperature, random_seed=args.random_seed, expected_type="dict")
-                    LLM_SIM_result[scenario] = llm_result
+            if scenario not in LLM_SIM_result:
+                # LLM Sim
+                messages = deepcopy(consistency_prompt)
+                filtered_predict_dict = {k: v for k, v in predict_dict.items() if v != "Not recorded"}
+                filtered_profile_data = {k: v for k, v in profile_data.items() if k in filtered_predict_dict}
+                messages[-1]["content"] = json.dumps({"GT_profile": filtered_profile_data, "Prediction_profile": filtered_predict_dict})
+                llm_result, _ = get_valid_answer_with_retries(client, messages, model=model, temperature=args.temperature, random_seed=args.random_seed, expected_type="dict")
+                LLM_SIM_result[scenario] = llm_result
 
-                    # Logging & save
-                    save_to_json(BERT_SIM_result, BERTscore_save_path)
-                    save_to_json(LLM_SIM_result, LLMscore_save_path)
+                # Logging & save
+                save_to_json(BERT_SIM_result, BERTscore_save_path)
+                save_to_json(LLM_SIM_result, LLMscore_save_path)
 
 
 if __name__ == "__main__":

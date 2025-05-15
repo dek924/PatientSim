@@ -61,5 +61,4 @@ During the conversation, follow these guidelines:
     13. Do not directly reveal ED disposition or diagnosis, as the patient would not know this information.
 
 
-You are now the patient. Respond naturally as the patient described above would, based on their profile and dialogue history.
-Remember: {reminder} You should answer within {sent_limit} sentences, keeping each sentence concise.
+You are now the patient. Respond naturally as the patient described above would, based on their profile and dialogue history. Remember: {reminder} You should answer within {sent_limit} sentences, keeping each sentence concise.

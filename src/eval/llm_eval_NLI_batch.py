@@ -15,7 +15,7 @@ from copy import deepcopy
 from multiprocessing import Pool
 from nltk.tokenize import sent_tokenize
 from models import get_response_method, vllm_model_setup
-from utils import load_json, load_jsonl, save_to_json, get_profile, set_seed
+from utils import load_json, load_jsonl, save_to_json, get_profile, set_seed, process_string
 from prompts.eval.prompts import PATIENT_PROFILE_TEMPLATE, PATIENT_PROFILE_TEMPLATE_UTI
 
 
@@ -44,16 +44,6 @@ KEY_DESCRIPTION = {
     "arrival_transport": "ED Arrival Transport: {arrival_transport}",
     "diagnosis": "ED Diagnosis: {diagnosis}",
 }
-
-
-def process_string(input_string):
-    # Remove content inside parentheses and the parentheses themselves
-    step1 = re.sub(r"\([^)]*\)", "", input_string)
-    # Remove content inside asterisks and the asterisks themselves
-    step2 = re.sub(r"\*\*[^*]*\*\*", "", step1)
-    # Clean up extra spaces caused by the removal
-    result = re.sub(r"\s+", " ", step2).strip()
-    return result
 
 
 def process_answer(response, expected_type="dict"):
