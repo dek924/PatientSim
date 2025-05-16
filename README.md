@@ -13,7 +13,7 @@
 ## Overview
 Doctor-patient consultations require multi-turn, context-aware communication tailored to diverse patient personas. 
 Training or evaluating doctor LLMs in such settings requires realistic patient interaction systems. However, existing simulators often fail to reflect the full range of personas seen in clinical practice. 
-To address this, we introduce PatientSim, a patient simulator that reflects realistic and diverse patient personas for clinical scenarios, grounded in medical expertise.
+To address this, we introduce PatientSim, a patient simulator that generates realistic and diverse patient personas for clinical scenarios, grounded in medical expertise.
 PatientSim operates using: 1) clinical profiles, including symptoms and medical history, derived from real-world data in the MIMIC-ED and MIMIC-IV datasets, and 2) personas defined by four axes, personality, language proficiency, medical history recall level, and cognitive confusion level, yielding 37 unique combinations.
 We evaluated eight LLMs for factual accuracy and persona consistency. 
 The top-performing open-source model, Llama 3.3, was validated by four clinicians to confirm the robustness of our framework.
@@ -60,7 +60,7 @@ All these source datasets require a credentialed Physionet credentialing. To acc
 After obtaining access, preprocess the data using the following script (with your PhysioNet credentials):
 ```
 cd src
-bash scripts/build_dataset.sh
+bash build_dataset.sh
 ```
 
 Update your API key before running:
@@ -70,6 +70,7 @@ export GOOGLE_PROJECT_ID="YOUR_PROJECT_ID"
 ```
 **Note**: While this script mirrors our internal preprocessing, results may vary due to API-based fluctuations. For consistent outcomes, we recommend using the preprocessed dataset available on Kaggle.
 
+<br />
 
 ## Running the Simulation
 ### API Setup
