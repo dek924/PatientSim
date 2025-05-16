@@ -118,7 +118,7 @@ python run_simulation.py \
 To customize the patient persona, use the following:
 ```
 cd src
-python run_simulation.py \
+python run_simulation_valid.py \
     --exp_name "YOUR_EXP_NAME" \
     --personality_type "$personality_type" \
     --cefr_type "$cefr_type" \
