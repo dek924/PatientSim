@@ -25,11 +25,12 @@ if AZURE_OPENAI_KEY != "":
         api_version="2024-10-21",
     )
 
-
 if OPENAI_API_KEY != "":
     client = OpenAI(api_key=OPENAI_API_KEY)
 
-gen_client = genai.Client(vertexai=True, project=GOOGLE_PROJECT_ID, location="us-central1", http_options=HttpOptions(api_version="v1"))
+if GOOGLE_PROJECT_ID != "":
+    gen_client = genai.Client(vertexai=True, project=GOOGLE_PROJECT_ID, location="us-central1", http_options=HttpOptions(api_version="v1"))
+
 time_gap = {"gpt-4": 3, "gpt-3.5-turbo": 0.5}
 
 

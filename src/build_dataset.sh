@@ -2,7 +2,6 @@
 
 export GOOGLE_APPLICATION_CREDENTIALS=../google_credentials.json
 export GOOGLE_PROJECT_ID="YOUR_PROJECT_ID"
-export GOOGLE_PROJECT_ID="823855790163"
 
 # Capture the start time
 start_time=$(date +%s)

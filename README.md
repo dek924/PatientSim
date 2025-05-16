@@ -1,15 +1,4 @@
 # PatientSim: A Persona-Driven Simulator for Realistic Doctor-Patient Interactions 
-<b> PatientSim: A Persona-Driven Simulator for Realistic Doctor-Patient Interactions</b> 
-<br>
-<a href="https://dek924.github.io/"> Daeun Kyung</a>,
-<a href="https://sites.google.com/view/thschung"> Hyunseung Chung</a>,
-<a href="https://seongsubae.info/"> Seongsu Bae</a>,
-<a href="https://jiho283.github.io/"> Jiho Kim</a>,
-<a href="https://profiles.ucsf.edu/jae.sohn"> Jaeho Sohn</a>,
-<a href="https://orcid.org/0000-0001-8340-9511"> Taerim Kim</a>,
-<a href="https://sites.google.com/view/soo-kyung-kim/home?authuser=0"> Soo Kyung Kim</a>,
-<a href="https://mp2893.com/"> Edward Choi</a>
-
 ## Overview
 Doctor-patient consultations require multi-turn, context-aware communication tailored to diverse patient personas. 
 Training or evaluating doctor LLMs in such settings requires realistic patient interaction systems. However, existing simulators often fail to reflect the full range of personas seen in clinical practice. 
@@ -19,6 +8,8 @@ We evaluated eight LLMs for factual accuracy and persona consistency.
 The top-performing open-source model, Llama 3.3, was validated by four clinicians to confirm the robustness of our framework.
 As an open-source, customizable platform, PatientSim provides a reproducible and scalable solution that can be customized for specific training needs. 
 Offering a privacy-compliant environment, it serves as a robust testbed for evaluating medical dialogue systems across diverse patient presentations and shows promise as an educational tool for healthcare.
+<img src="overview.png"> 
+
 
 <br />
 
