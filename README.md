@@ -3,7 +3,7 @@
 Doctor-patient consultations require multi-turn, context-aware communication tailored to diverse patient personas. 
 Training or evaluating doctor LLMs in such settings requires realistic patient interaction systems. However, existing simulators often fail to reflect the full range of personas seen in clinical practice. 
 To address this, we introduce PatientSim, a patient simulator that generates realistic and diverse patient personas for clinical scenarios, grounded in medical expertise.
-PatientSim operates using: 1) clinical profiles, including symptoms and medical history, derived from real-world data in the MIMIC-ED and MIMIC-IV datasets, and 2) personas defined by four axes, personality, language proficiency, medical history recall level, and cognitive confusion level, yielding 37 unique combinations.
+PatientSim operates using: 1) clinical profiles, including symptoms and medical history, derived from real-world data in the MIMIC-ED and MIMIC-IV datasets, and 2) personas defined by four axes: personality, language proficiency, medical history recall level, and cognitive confusion level, resulting in 37 unique combinations.
 We evaluated eight LLMs for factual accuracy and persona consistency. 
 The top-performing open-source model, Llama 3.3, was validated by four clinicians to confirm the robustness of our framework.
 As an open-source, customizable platform, PatientSim provides a reproducible and scalable solution that can be customized for specific training needs. 
