@@ -49,7 +49,7 @@ def split_history_section(data_df, start_key, end_key1, endkey2):
 def main(args):
     # Load discharge summaries
     print("Load note dataframes...")
-    note_df = pd.read_csv(os.path.join(args.note_dir, "discharge.csv.gz"))
+    note_df = pd.read_csv(os.path.join(args.note_dir, "discharge.csv"))
     print_statistic(note_df)
     print()
 

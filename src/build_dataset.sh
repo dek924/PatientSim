@@ -16,16 +16,18 @@ MIMIC_ED="https://physionet.org/files/mimic-iv-ed/2.2"
 MIMIC_NOTE="https://physionet.org/files/mimic-iv-note/2.2"
 
 # Define wget parameters for readability
-WGET_PARAMS="-r -N -c -np --user $USERNAME --password $PASSWORD"
+WGET_PARAMS="-N -c --user $USERNAME --password $PASSWORD"
 
 # Helper function to download and extract files
 download_and_extract() {
     local file_url=$1
     local destination_dir=$2
     local file_name=$(basename "$file_url")
+    
+    mkdir -p "$destination_dir"
 
     # Download the file
-    wget $WGET_PARAMS "$file_url"
+    wget $WGET_PARAMS -P "$destination_dir" "$file_url"
 
     # Extract if it's a zip file
     if [[ "$file_name" == *.zip ]]; then
