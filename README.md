@@ -10,6 +10,21 @@ As an open-source, customizable platform, PatientSim provides a reproducible and
 Offering a privacy-compliant environment, it serves as a robust testbed for evaluating medical dialogue systems across diverse patient presentations and shows promise as an educational tool for healthcare.
 <img src="overview.png"> 
 
+<br />
+
+## Updates
+- [08/21/2025] We released the official Python package of our simulator: [patientsim](https://pypi.org/project/patientsim/0.1.2/#history).
+- [05/23/2025] We released our research paper on [arXiv](https://www.arxiv.org/abs/2505.17818).
+
+<br />
+
+## Dataset
+### Download
+- The dataset will be provided through PhysioNet and requires a credentialed PhysioNet account (currently under review). 
+- Unzip the dataset in the `./src/data/final_data` folder, which is the default path for the PatientSim experiment.
+
+### Data Preprocessing
+- Details of our data preprocessing process can be found in [`prepare_datasets.md`](src/data_preprocessing/prepare_datasets.md).
 
 <br />
 
@@ -26,79 +41,40 @@ conda activate patientsim
 # Install required packages
 pip install -r requirements.txt
 ```
-<br />
 
-## Patient Profile Construction
-### Prerequisites
-We are currently utilizing three databases: MIMIC-IV (v3.1), MIMIC-IV-Note (v2.2), and MIMIC-IV-ED (v2.2). 
-All these source datasets require a credentialed Physionet credentialing. To access the source datasets, you must fulfill all of the following requirements:
-1. Be a [credentialed user](https://physionet.org/settings/credentialing/)
-    - If you do not have a PhysioNet account, register for one [here](https://physionet.org/register/).
-    - Follow these [instructions](https://physionet.org/credential-application/) for credentialing on PhysioNet.
-    - Complete the "CITI Data or Specimens Only Research" [training course](https://physionet.org/about/citi-course/).
-2. Sign the data use agreement (DUA) for each project
-    - https://physionet.org/sign-dua/mimiciv/3.1/
-    - https://physionet.org/sign-dua/mimic-iv-ed/2.2/
-    - https://physionet.org/sign-dua/mimic-iv-note/2.2/
-
-
-### Download
-- Download the dataset using the provided link [<a href="https://kaggle.com/datasets/f04fc0f48b1b3677d31006555c5f8bae7766a7384c66ba210f6526bd58d85b79">link</a>].
-- Unzip the dataset in the `./src/data/final_data` folder, which is the default path for the PatientSim experiment.
-
-
-### Data Preprocessing
-After obtaining access, preprocess the data using the following script (with your PhysioNet credentials):
-```
-cd src
-bash build_dataset.sh
-```
-
-Update your API key before running:
-```
-export GOOGLE_APPLICATION_CREDENTIALS="YOUR_GOOGLE_APPLICATION_CREDENTIALS_PATH"
-export GOOGLE_PROJECT_ID="YOUR_PROJECT_ID"
-```
-**Note**: While this script mirrors our internal preprocessing, results may vary due to API-based fluctuations. For consistent outcomes, we recommend using the preprocessed dataset available on Kaggle.
-
-<br />
-
-## Running the Simulation
 ### API Setup
-Set API credentials for Google, Gemini, OpenAI, Azure, or other supported services. You can either:
-**Option 1: Use environment variables**
+Set API credentials depending on which provider you’re using. 
+Note that since our patient profile is based on MIMIC database, which requires PhysioNet credentials, only Vertex AI (Gemini) or Azure OpenAI (GPT) are supported (per PhysioNet’s instructions).
 ```
-export GOOGLE_APPLICATION_CREDENTIALS="YOUR_GOOGLE_APPLICATION_CREDENTIALS_PATH"
-export GOOGLE_PROJECT_ID="YOUR_PROJECT_ID"
-export GEMINI_API_KEY="YOUR_GEMINI_API_KEY"
+
+# For GPT API with Azure
 export OPENAI_API_KEY="YOUR_OPENAI_API_KEY"
 export AZURE_OPENAI_KEY="YOUR_AZURE_OPENAI_KEY"
 export AZURE_ENDPOINT="YOUR_AZURE_ENDPOINT"
-export VLLM_PORT="YOUR_VLLM_PORT"
-```
 
-**Option 2: Update in code (`src/models.py`)**
-```
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv("GOOGLE_APPLICATION_CREDENTIALS", "./google_credentials.json")
-os.environ["GOOGLE_PROJECT_ID"] = os.getenv("GOOGLE_PROJECT_ID", "")
-GOOGLE_PROJECT_ID = os.getenv("GOOGLE_PROJECT_ID", "")
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
-AZURE_OPENAI_KEY = os.getenv("AZURE_OPENAI_KEY", "")
-AZURE_ENDPOINT = os.getenv("AZURE_ENDPOINT", "")
-PORT = os.getenv("VLLM_PORT", "")
+# For Gemini API with Vertex AI
+export GOOGLE_PROJECT_ID="YOUR_PROJECT_ID"
+export GOOGLE_PROJECT_LOCATION="YOUR_PROJECT_ID"
+export GOOGLE_APPLICATION_CREDENTIALS="YOUR_GOOGLE_APPLICATION_CREDENTIALS_PATH"
+
+# For vLLM serving model
+export VLLM_PORT="YOUR_VLLM_PORT"
 ```
 
 ### vLLM setting
 Start the vLLM server:
 ```
 python -m vllm.entrypoints.openai.api_server \
-    --model meta-llama/Llama-3.3-70B-Instruct \
+    --model meta-llama/Llama-3.3-70B-Instruct \ # change the model name 
     --load-format safetensors \
     --max-model-len 9182 \
-    --port PORT
+    --port VLLM_PORT
 ```
 
+<br />
+
+
+## Running the Simulation
 
 ### Default Settings
 To run a simulation with default persona and hyperparameters:
@@ -140,7 +116,7 @@ Evaluate generated dialogues for persona fidelity, profile consistency, or diffe
 cd src
 python ./eval/llm_eval.py \
     --trg_exp_name "${trg_exp_name}"  \
-    --moderator gemini-2.5-flash-preview-04-17  \
+    --moderator gemini-2.5-flash  \
     --moderator_api_type genai  \
     --eval_persona_quality  
 ```
@@ -155,10 +131,33 @@ Evaluate generated dialogues at the sentence level:
 cd src
 python ./eval/llm_eval_NLI_batch.py \
     --trg_exp_name "${trg_exp_name}" \
-    --moderator gemini-2.5-flash-preview-04-17 \
+    --moderator gemini-2.5-flash \
     --eval_target all \
     --moderator_api_type genai
 ```
 
-### Analysis
-To analyze the results in more detail, we provide a Jupyter Notebook (`analysis.ipynb`) in the same link as the dataset [<a href="https://kaggle.com/datasets/f04fc0f48b1b3677d31006555c5f8bae7766a7384c66ba210f6526bd58d85b79">link</a>].
+<br />
+
+## Demo
+You can quickly try out PatientSim using `demo/demo.py`.
+See [`how_to_use_demo.md`](demo/how_to_use_demo.md) for detailed instructions.
+
+<br />
+
+## Citation
+```
+@misc{kyung2025patientsimpersonadrivensimulatorrealistic,
+      title={PatientSim: A Persona-Driven Simulator for Realistic Doctor-Patient Interactions}, 
+      author={Daeun Kyung and Hyunseung Chung and Seongsu Bae and Jiho Kim and Jae Ho Sohn and Taerim Kim and Soo Kyung Kim and Edward Choi},
+      year={2025},
+      eprint={2505.17818},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2505.17818}, 
+}
+```
+
+<br />
+
+## Contact
+For any questions or concerns regarding this code, please contact to us ([kyungdaeun@kaist.ac.kr](mailto:kyungdaeun@kaist.ac.kr)).
