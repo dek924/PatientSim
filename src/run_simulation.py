@@ -39,9 +39,11 @@ class PatientAgent:
         temperature=0,
         random_seed=42,
         prompt_dir=None,
+        prompt_file=None,
         num_word_sample=3,
     ):
         self.prompt_dir = prompt_dir
+        self.prompt_file = prompt_file
         self.backend = backend_str  # language model backend for patient agent
         self.backend_api_type = backend_api_type  # language model backend for patient agent
         self.temperature = temperature
@@ -123,7 +125,7 @@ class PatientAgent:
         self.patient_profile["sent_limit"] = self.sentence_limit[self.personality_type] if self.personality_type is not None else "3"
 
         # Load prompt text file
-        prompt_file = args.patient_prompt_file
+        prompt_file = self.patient_prompt_file
         if self.patient_profile["diagnosis"] == "Urinary tract infection":
             prompt_file += "_uti"
         self.system_prompt_text = file_to_string(os.path.join(self.prompt_dir, prompt_file + ".txt"))
@@ -155,8 +157,9 @@ class PatientAgent:
 
 
 class DoctorAgent:
-    def __init__(self, max_infs=15, top_k_diagnosis=5, backend_str="gpt4", backend_api_type="gpt_azure", temperature=0, random_seed=42, prompt_dir=None, patient_info=None) -> None:
+    def __init__(self, max_infs=15, top_k_diagnosis=5, backend_str="gpt4", backend_api_type="gpt_azure", temperature=0, random_seed=42, prompt_dir=None, prompt_file=None, patient_info=None) -> None:
         self.prompt_dir = prompt_dir
+        self.prompt_file = prompt_file
         self.infs = 0  # number of inference calls to the doctor
         self.max_infs = max_infs  # maximum number of inference calls to the doctor
         self.top_k_diagnosis = top_k_diagnosis
@@ -167,8 +170,7 @@ class DoctorAgent:
         self.patient_info = patient_info if patient_info is not None else {}
 
         # Load prompt text file
-        prompt_file = args.doctor_prompt_file
-        self.system_prompt_text = file_to_string(os.path.join(self.prompt_dir, prompt_file + ".txt"))
+        self.system_prompt_text = file_to_string(os.path.join(self.prompt_dir, self.prompt_file + ".txt"))
 
         # prepare initial conditions for LLM
         self.doctor_greet = "Hello, how can I help you?"
@@ -222,6 +224,7 @@ def main(args):
             temperature=args.temperature,
             random_seed=args.random_seed,
             prompt_dir=args.prompt_dir,
+            prompt_file=args.patient_prompt_file,
             num_word_sample=args.num_word_sample,
         )
         doctor_agent = DoctorAgent(
@@ -232,6 +235,7 @@ def main(args):
             temperature=args.temperature,
             random_seed=args.random_seed,
             prompt_dir=args.prompt_dir,
+            prompt_file=args.doctor_prompt_file,
             patient_info=scenario,
         )
 
@@ -290,7 +294,7 @@ if __name__ == "__main__":
         default="gpt-4o-mini",
         choices=[
             "gpt-4o-mini",
-            "gemini-2.5-flash-preview-04-17",
+            "gemini-2.5-flash",
             "vllm-llama3.1-8b-instruct",
             "vllm-llama3.1-70b-instruct",
             "vllm-llama3.3-70b-instruct",
@@ -305,7 +309,7 @@ if __name__ == "__main__":
         default="gpt-4o-mini",
         choices=[
             "gpt-4o-mini",
-            "gemini-2.5-flash-preview-04-17",
+            "gemini-2.5-flash",
             "vllm-llama3.1-8b-instruct",
             "vllm-llama3.1-70b-instruct",
             "vllm-llama3.3-70b-instruct",
