@@ -16,6 +16,7 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
 AZURE_OPENAI_KEY = os.getenv("AZURE_OPENAI_KEY", "")
 AZURE_ENDPOINT = os.getenv("AZURE_ENDPOINT", "")
 GOOGLE_PROJECT_ID = os.getenv("GOOGLE_PROJECT_ID", "")
+GOOGLE_PROJECT_LOCATION = os.getenv("GOOGLE_PROJECT_LOCATION", "")
 PORT = os.getenv("VLLM_PORT", "")
 
 if AZURE_OPENAI_KEY != "":
@@ -29,7 +30,7 @@ if OPENAI_API_KEY != "":
     client = OpenAI(api_key=OPENAI_API_KEY)
 
 if GOOGLE_PROJECT_ID != "":
-    gen_client = genai.Client(vertexai=True, project=GOOGLE_PROJECT_ID, location="us-central1", http_options=HttpOptions(api_version="v1"))
+    gen_client = genai.Client(vertexai=True, project=GOOGLE_PROJECT_ID, location=GOOGLE_PROJECT_LOCATION, http_options=HttpOptions(api_version="v1"))
 
 time_gap = {"gpt-4": 3, "gpt-3.5-turbo": 0.5}
 
@@ -74,7 +75,7 @@ def gemini_response(message: list, model="gemini-2.0-flash", temperature=0, seed
         raise NotImplementedError
 
     try:
-        if model == "gemini-2.5-flash-preview-04-17":
+        if model == "gemini-2.5-flash":
             return gen_client.models.generate_content(
                 model=model,
                 contents=contents,
