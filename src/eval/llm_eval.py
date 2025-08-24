@@ -401,7 +401,7 @@ if __name__ == "__main__":
             "gpt-4o-mini",
             "gpt-4o",
             "gemini-2.0-flash",
-            "gemini-2.5-flash-preview-04-17",
+            "gemini-2.5-flash",
             "vllm-deepseek-llama-70b",
             "vllm-llama3.1-70b-instruct",
             "vllm-llama3.3-70b-instruct",

@@ -124,10 +124,10 @@ if __name__ == "__main__":
     parser.add_argument(
         "--model",
         type=str,
-        default="gemini-2.5-flash-preview-04-17",
+        default="gemini-2.5-flash",
         choices=[
             "gpt-4o",
-            "gemini-2.5-flash-preview-04-17"
+            "gemini-2.5-flash"
         ],
     )
     parser.add_argument("--model_api_type", type=str, default="genai", choices=["gpt_azure", "genai"])
