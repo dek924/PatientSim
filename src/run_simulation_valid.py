@@ -220,7 +220,7 @@ def main(args):
             patient_profile=scenario,
             backend_str=args.patient_llm,
             backend_api_type=args.patient_api_type,
-            temperature=args.temperature,
+            temperature=args.patient_temperature,
             random_seed=args.random_seed,
             prompt_dir=args.prompt_dir,
             prompt_file=args.patient_prompt_file,
@@ -235,7 +235,7 @@ def main(args):
             top_k_diagnosis=args.top_k_diagnosis,
             backend_str=args.doctor_llm,
             backend_api_type=args.doctor_api_type,
-            temperature=args.temperature,
+            temperature=args.doc_temperature,
             random_seed=args.random_seed,
             prompt_dir=args.prompt_dir,
             prompt_file=args.doctor_prompt_file,
@@ -321,7 +321,8 @@ if __name__ == "__main__":
             "vllm-deepseek-llama-70b",
         ],
     )
-    parser.add_argument("--temperature", type=float, default=0)
+    parser.add_argument("--doc_temperature", type=float, default=0)
+    parser.add_argument("--patient_temperature", type=float, default=0)
     parser.add_argument("--random_seed", type=int, default=42)
 
     # Path define
