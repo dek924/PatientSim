@@ -43,6 +43,24 @@ def get_answer(response):
     return answer
 
 
+def get_token_log(response):
+    token_usage = {}
+    if hasattr(response, "usage"):
+        token_usage["prompt_tokens"] = response.usage.prompt_tokens
+        token_usage["completion_tokens"] = response.usage.completion_tokens
+        token_usage["total_tokens"] = response.usage.total_tokens
+        if hasattr(response.usage, "completion_tokens_details"):  # for gpt-5 series
+            if hasattr(response.usage.completion_tokens_details, "reasoning_tokens"):
+                token_usage["extra_info"] = {"reasoning_tokens": response.usage.completion_tokens_details.reasoning_tokens}
+    elif hasattr(response.usage_metadata):
+        token_usage["prompt_tokens"] = response.usage_metadata.prompt_token_count
+        token_usage["completion_tokens"] = response.usage_metadata.candidates_token_count
+        token_usage["total_tokens"] = response.usage_metadata.total_token_count
+    else:
+        raise NotImplementedError(f"Fail to extract usage data: {response}")
+    return token_usage
+    
+
 def gpt_azure_response(message: list, model="gpt-4o", temperature=0, seed=42, **kwargs):
     time.sleep(time_gap.get(model, 3))
     try:

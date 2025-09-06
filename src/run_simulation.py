@@ -75,6 +75,7 @@ def main(cfg):
         )
 
         # Start dialogue
+        start_time = time.time()
         dialog_history = [{"role": "Doctor", "content": doctor_agent.doctor_greet}]
         doctor_agent.messages.append({"role": "assistant", "content": f"{doctor_agent.doctor_greet}"})
         logging.info(f"Doctor: {doctor_agent.doctor_greet}")
@@ -101,18 +102,25 @@ def main(cfg):
             # Prevent API timeouts
             time.sleep(1.0)
 
+        end_time = time.time()
         dialog_info = {
             "hadm_id": scenario["hadm_id"],
             "doctor_engine_name": doctor_agent.backend,
             "patient_engine_name": patient_agent.backend,
+            "doctor_api_type": doctor_agent.backend_api_type,
+            "patient_api_type": patient_agent.backend_api_type,
             "cefr_type": patient_agent.patient_profile["cefr_option"],
             "personality_type": patient_agent.patient_profile["personality_option"],
             "recall_level_type": patient_agent.patient_profile["recall_level_option"],
-            "dazed_level_type": patient_agent.patient_profile["dazed_level_option"],
+            "dazed_level_type":patient_agent.patient_profile["dazed_level_option"],
             "diagnosis": patient_agent.diagnosis,
             "dialog_history": dialog_history,
+            "patient_token_log": patient_agent.token_log,
+            "doctor_token_log": doctor_agent.token_log,
+            "elapsed_time": end_time - start_time,
         }
         save_to_dialogue(dialog_info, os.path.join(cfg.save_dir, "dialogue.jsonl"))
+
 
 if __name__ == "__main__":
     main()
