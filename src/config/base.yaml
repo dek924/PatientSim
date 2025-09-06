@@ -1,0 +1,41 @@
+data_dir: ./data/final_data
+prompt_dir: ./prompts/simulation
+save_dir: outputs 
+
+experiment:
+  exp_name: ""
+  random_seed: 42
+  total_inferences: 30
+  verbose: true
+
+data:
+  data_file_name: patient_profile
+  num_scenarios: null
+  num_word_sample: 10
+  patient_prompt_file: initial_system_patient_w_persona
+  doctor_prompt_file: initial_system_doctor
+
+
+patient_agent:
+  api_type: vllm
+  backend: vllm-llama3.3-70b-instruct
+  params:
+    temperature: 0.7
+    seed: ${experiment.random_seed}
+
+
+doctor_agent:
+  api_type: gpt_azure
+  backend: gpt-4o
+  max_infs: 30
+  top_k_diagnosis: 5
+  params:
+    temperature: 1.0
+    seed: ${experiment.random_seed}
+
+hydra:
+  job_logging:
+    root:
+      level: INFO 
+  run:
+    dir: results/${now:%Y-%m-%d-%H-%M-%S}_${experiment.exp_name}
