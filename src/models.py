@@ -52,7 +52,7 @@ def get_token_log(response):
         if hasattr(response.usage, "completion_tokens_details"):  # for gpt-5 series
             if hasattr(response.usage.completion_tokens_details, "reasoning_tokens"):
                 token_usage["extra_info"] = {"reasoning_tokens": response.usage.completion_tokens_details.reasoning_tokens}
-    elif hasattr(response.usage_metadata):
+    elif hasattr(response, "usage_metadata"):
         token_usage["prompt_tokens"] = response.usage_metadata.prompt_token_count
         token_usage["completion_tokens"] = response.usage_metadata.candidates_token_count
         token_usage["total_tokens"] = response.usage_metadata.total_token_count
