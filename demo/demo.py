@@ -9,7 +9,7 @@ import streamlit.components.v1 as components
 from datetime import datetime
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "src")))
-from run_simulation_valid import PatientAgent
+from run_simulation import PatientAgent
 
 CEFR_DICT = {
     "A": "Beginner\n\tCan make simple sentences.",
@@ -179,19 +179,22 @@ def demo_page():
         # Load patient basic info for initialization
         import copy
         selected_patient = copy.deepcopy(selected_patient_profile)
+        client_params = {
+            "temperature": 0,
+            "random_seed": config["random_seed"],
+        }
         st.session_state.patient_agent = PatientAgent(
             patient_profile=selected_patient,
             backend_str=config["model"],
             backend_api_type=config["backend_api_type"],
             prompt_dir=config["prompt_dir"],
             prompt_file=config["patient_prompt_file"],
-            temperature=0,
-            random_seed=config["random_seed"],
+            num_word_sample=10,
             cefr_type=selected_patient["cefr"],
             personality_type=selected_patient["personality"],
             recall_level_type=selected_patient["recall_level"],
             dazed_level_type=selected_patient["dazed_level"],
-            num_word_sample=10,
+            client_params=client_params,
         )
 
 
