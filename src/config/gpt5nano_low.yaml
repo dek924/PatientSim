@@ -1,0 +1,21 @@
+defaults:
+  - base
+
+experiment:
+  random_seed: 42
+  exp_name: gpt5nano_low_test
+
+doctor_agent:
+  api_type: gpt_azure
+  backend: gpt-5-nano
+  max_infs: 30
+  top_k_diagnosis: 5
+  params:
+    temperature: 1.0
+    seed: ${experiment.random_seed}
+    reasoning_effort: "low"  # new parameter for gpt-5 series, default is "medium"
+
+
+hydra:
+  run:
+    dir: results/nano_test/${now:%Y-%m-%d-%H-%M-%S}_${experiment.exp_name}
