@@ -24,6 +24,7 @@ Offering a privacy-compliant environment, it serves as a robust testbed for eval
 <br />
 
 ## Updates
+- [10/18/2025] We released [PatientSim](https://physionet.org/content/persona-patientsim/1.0.0/) dataset on Physionet.
 - [08/21/2025] We released the official Python package of our simulator: [patientsim](https://pypi.org/project/patientsim).
 - [05/23/2025] We released our research paper on [arXiv](https://www.arxiv.org/abs/2505.17818).
 
