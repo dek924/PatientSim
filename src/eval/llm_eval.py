@@ -107,7 +107,7 @@ def main(args):
 
     # Load test data
     scenario_dict = load_json(os.path.join(args.data_dir, f"{args.data_file_name}.json"))
-    dialogue_hists = load_jsonl(os.path.join(result_path, "dialogue.jsonl"))
+    dialogue_hists = load_jsonl(os.path.join(result_path, "outputs", "dialogue.jsonl"))
 
     # Eval DDX task
     if args.eval_ddx:
@@ -127,12 +127,12 @@ def main(args):
             dialogue = data["dialog_history"]
             gt_diagnosis = data["diagnosis"]
             if gt_diagnosis == "Urinary tract infection":
-                gt_diagnosis = "Urinary tract infection group (including pyelonephritis and cystitis)"
+                gt_diagnosis = "Urinary tract infection group (including UTI, pyelonephritis and cystitis)"
 
             doctor_prediction = None
             for utter in dialogue:
                 if detect_termination(utter["content"].lower()):
-                    doctor_prediction = utter["content"].lower().split("[ddx]")[-1].strip()
+                    doctor_prediction = utter["content"].lower().split("[ddx]", 1)[-1].strip()
 
             if doctor_prediction is None:
                 doctor_prediction = dialogue[-1]["content"].lower()
@@ -400,6 +400,7 @@ if __name__ == "__main__":
         choices=[
             "gpt-4o-mini",
             "gpt-4o",
+            "gpt-5-nano",
             "gemini-2.0-flash",
             "gemini-2.5-flash",
             "vllm-deepseek-llama-70b",

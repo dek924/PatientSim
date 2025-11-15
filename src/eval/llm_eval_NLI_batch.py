@@ -311,6 +311,7 @@ if __name__ == "__main__":
         choices=[
             "gpt-4o-mini",
             "gpt-4o",
+            "gpt-5-nano",
             "gemini-2.0-flash",
             "gemini-2.5-flash",
             "vllm-deepseek-llama-70b",
