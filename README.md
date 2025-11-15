@@ -5,8 +5,8 @@
 <a href="https://jiho283.github.io/"> Jiho Kim</a>,
 <a href="https://radiology.ucsf.edu/people/jae-ho-sohn"> Jae Ho Sohn</a>,
 <a href="https://smarthealthlab.skku.edu/taerim-kim/"> Taerim Kim</a>,
-<a href="https://sites.google.com/view/soo-kyung-kim/home?authuser=0"> Soo Kyung Kim</a>,
-<a href="https://mp2893.com/"> Edward Choi</a>
+<a href="https://sites.google.com/view/soo-kyung-kim/home?authuser=0"> Soo Kyung Kim*</a>,
+<a href="https://mp2893.com/"> Edward Choi*</a>
 <br>
 <a href="https://neurips.cc/"> NeurIPS 2025 Datasets & Benchmarks Track (Spotlight) </a>
 
@@ -24,7 +24,7 @@ Offering a privacy-compliant environment, it serves as a robust testbed for eval
 <br />
 
 ## Updates
-- [10/18/2025] We released [PatientSim](https://physionet.org/content/persona-patientsim/1.0.0/) dataset on Physionet.
+- [10/18/2025] We released [PatientSim](https://physionet.org/content/persona-patientsim/1.0.0/) dataset on PhysioNet.
 - [08/21/2025] We released the official Python package of our simulator: [patientsim](https://pypi.org/project/patientsim).
 - [05/23/2025] We released our research paper on [arXiv](https://www.arxiv.org/abs/2505.17818).
 
@@ -57,17 +57,21 @@ pip install -r requirements.txt
 ### API Setup
 Set API credentials depending on which provider you’re using. 
 Note that since our patient profile is based on MIMIC database, which requires PhysioNet credentials, only Vertex AI (Gemini) or Azure OpenAI (GPT) are supported (per PhysioNet’s instructions).
-```
+> [!NOTE]
+> To use Vertex AI, you must complete the following setup steps:
+> 1) Select or create a Google Cloud project in the Google Cloud Console.
+> 2) Enable the Vertex AI API.
+> 3) Generate a Vertex AI Express Mode API key and set its value in the `GENAI_API_KEY` environment variable.
 
+```
 # For GPT API with Azure
 export OPENAI_API_KEY="YOUR_OPENAI_API_KEY"
 export AZURE_OPENAI_KEY="YOUR_AZURE_OPENAI_KEY"
 export AZURE_ENDPOINT="YOUR_AZURE_ENDPOINT"
 
 # For Gemini API with Vertex AI
-export GOOGLE_PROJECT_ID="YOUR_PROJECT_ID"
-export GOOGLE_PROJECT_LOCATION="YOUR_PROJECT_LOCATION"
-export GOOGLE_APPLICATION_CREDENTIALS="YOUR_GOOGLE_APPLICATION_CREDENTIALS_PATH"
+export GENAI_API_KEY="YOUR_API_KEY"
+export GOOGLE_GENAI_USE_VERTEXAI="True"
 
 # For vLLM serving model
 export VLLM_PORT="YOUR_VLLM_PORT"
@@ -164,14 +168,13 @@ See [`how_to_use_demo.md`](demo/how_to_use_demo.md) for detailed instructions.
 
 ## Citation
 ```
-@misc{kyung2025patientsimpersonadrivensimulatorrealistic,
-      title={PatientSim: A Persona-Driven Simulator for Realistic Doctor-Patient Interactions}, 
-      author={Daeun Kyung and Hyunseung Chung and Seongsu Bae and Jiho Kim and Jae Ho Sohn and Taerim Kim and Soo Kyung Kim and Edward Choi},
-      year={2025},
-      eprint={2505.17818},
-      archivePrefix={arXiv},
-      primaryClass={cs.AI},
-      url={https://arxiv.org/abs/2505.17818}, 
+@inproceedings{
+    kyung2025patientsim,
+    title={PatientSim: A Persona-Driven Simulator for Realistic Doctor-Patient Interactions},
+    author={Daeun Kyung and Hyunseung Chung and Seongsu Bae and Jiho Kim and Jae Ho Sohn and Taerim Kim and Soo Kyung Kim and Edward Choi},
+    booktitle={The Thirty-ninth Annual Conference on Neural Information Processing Systems Datasets and Benchmarks Track},
+    year={2025},
+    url={https://openreview.net/forum?id=1THAjdP4QJ}
 }
 ```
 
