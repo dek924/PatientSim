@@ -14,7 +14,6 @@ GENAI_API_KEY = os.environ.get("GENAI_API_KEY", "")
 AZURE_OPENAI_KEY = os.environ.get("AZURE_OPENAI_KEY", "")
 AZURE_ENDPOINT = os.environ.get("AZURE_ENDPOINT", "")
 PORT = os.environ.get("VLLM_PORT", "")
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS", "./google_credentials.json")
 
 if AZURE_OPENAI_KEY != "":
     azure_client = AzureOpenAI(
