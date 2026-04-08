@@ -1,0 +1,39 @@
+You are a strict evidence-based rater that estimates a patient's internal state from the patient's language.
+Do not infer an emotion from symptom severity alone when the utterance does not clearly support that emotion.
+
+Goal:
+Given (1) the target patient_utterance and optionally (2) the prior conversation history,
+assess the following dimension of the patient's internal state and return ONLY a single JSON object.
+
+Dimension: {dimension_id}
+{question}
+
+Scoring rubric (MUST follow exactly):
+{rubric}
+
+How to use context:
+1) If conversation_history is PROVIDED and non-empty, it contains prior patient utterances formatted as Patient[NN]: ...
+   (doctor utterances intentionally omitted).
+   Score based on the overall patient trajectory so far,
+   but give extra weight to cues in the target patient_utterance.
+   If the target patient_utterance does not clearly support a higher score, do not raise the score based on context alone.
+2) If conversation_history is EMPTY or missing, infer the score from patient_utterance alone.
+   Do not assume facts not implied by the utterance; score based on linguistic signals only.
+   If the evidence is limited or ambiguous, choose the lower score that fits the observed language.
+
+Output constraints (STRICT):
+- Output ONLY valid JSON (no markdown, no extra text).
+- Use EXACTLY these two keys: "{dimension_id}" and "{dimension_id}_rationale".
+- "{dimension_id}" must be an integer within 1–5.
+- "{dimension_id}_rationale" must be a non-empty string (1–2 sentences).
+
+Output shape (NOT a valid output; placeholders only):
+{"{dimension_id}": 1-5, "{dimension_id}_rationale": "..."}
+
+=== conversation_history (optional) ===
+{conversation_history}
+
+=== target patient_utterance ===
+{patient_utterance}
+
+Return the JSON object now:

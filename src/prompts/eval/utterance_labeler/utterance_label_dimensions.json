@@ -1,0 +1,57 @@
+[
+  {
+    "id": "doubt",
+    "question": "Based on the patient's utterance below, estimate how much doubt or distrust the patient feels toward the doctor. On a scale of 1 to 5, where 1 means complete trust and 5 means extreme distrust or suspicion, what is the patient's level of doubt?",
+    "rubric": [
+      "1: No doubt at all. The patient accepts the doctor's words as absolute truth, showing complete trust and no suspicion.",
+      "2: Minor uncertainty. The patient generally trusts the doctor but shows a vague hesitation, needing more explanation to be fully convinced.",
+      "3: Skeptical. The patient logically questions the doctor's reasoning or explanation, implying a need to verify with other sources later.",
+      "4: Strong suspicion. The patient actively doubts the doctor's competence or motives, suggesting the doctor may be wrong, hiding something, or financially motivated.",
+      "5: Complete distrust. The patient appears convinced the doctor is lying or incompetent, rejecting their advice and internally refusing to cooperate."
+    ]
+  },
+  {
+    "id": "impatience",
+    "question": "Based on the patient's utterance below, estimate how impatient or irritated the patient feels during the consultation. On a scale of 1 to 5, where 1 means completely calm and patient and 5 means extremely irritated and wanting the conversation to end, what is the patient's level of impatience?",
+    "rubric": [
+      "1: Very patient. The patient seems calm and willing to let the doctor proceed at their own pace without frustration.",
+      "2: Slightly impatient. The patient would prefer things to move a bit faster but is still tolerating the conversation without notable frustration.",
+      "3: Moderately impatient. The patient shows signs of annoyance at repetition, slow pacing, or long explanations, wanting the doctor to be more direct.",
+      "4: Very impatient. The patient is clearly irritated by the pace or style, wanting immediate and practical answers rather than continued back-and-forth.",
+      "5: Extremely impatient. The patient appears fed up, treating the pace or indirectness as unbearable and wanting the conversation wrapped up or redirected immediately."
+    ]
+  },
+  {
+    "id": "anxiety",
+    "question": "Based on the patient's utterance below, estimate how anxious or fearful the patient feels that their symptoms may indicate something serious. On a scale of 1 to 5, where 1 means calm and not seriously worried and 5 means extremely afraid of something dangerous or life-threatening, what is the patient's level of anxiety? Score anxiety based on evidence of felt worry, fear, or nervous apprehension. Do not assign a high anxiety score from urgency, frustration, distrust, or severe symptoms alone unless the utterance also suggests worry or fear.",
+    "rubric": [
+      "1: Calm. The patient does not appear seriously worried that the symptoms are dangerous, and seems emotionally steady.",
+      "2: Mildly worried. The patient shows some concern but still seems to believe the problem is probably manageable and not very serious.",
+      "3: Noticeably anxious. The patient shows clear signs of worry that this could be a serious illness, but the fear is limited and not overwhelming.",
+      "4: Strongly fearful. The patient clearly expresses strong worry or fear that something dangerous may be happening, and this fear is a major feature of the utterance.",
+      "5: Extremely fearful. The patient explicitly or unmistakably conveys overwhelming fear that something severe or life-threatening is happening."
+    ]
+  },
+  {
+    "id": "minimization",
+    "question": "Based on the patient's utterance below, estimate how strongly the patient tends to minimize or downplay their health problem. On a scale of 1 to 5, where 1 means the patient takes the problem seriously and 5 means the patient strongly believes it is minor or harmless, what is the patient's level of minimization?",
+    "rubric": [
+      "1: Not minimizing. The patient treats the problem as potentially important and worthy of serious attention.",
+      "2: Slightly minimizing. The patient leans toward seeing it as minor but can accept that it may need proper medical attention.",
+      "3: Moderately minimizing. The patient tends to see the problem as probably not a big deal, even while understanding why the doctor is concerned.",
+      "4: Strongly minimizing. The patient treats the problem as small, temporary, and probably harmless, naturally downplaying the symptoms.",
+      "5: Extremely minimizing. The patient appears convinced the issue is basically nothing serious, strongly interpreting symptoms as mild, temporary, or overblown."
+    ]
+  },
+  {
+    "id": "satisfaction",
+    "question": "Based on the patient's utterance below, estimate the patient's overall satisfaction with the consultation so far. On a scale of 1 to 5, where 1 means very dissatisfied or feeling ignored and 5 means very satisfied and deeply understood, what is the patient's level of satisfaction?",
+    "rubric": [
+      "1: Very Dissatisfied. The patient seems to feel ignored, misunderstood, or offended, as though the consultation is a waste of time.",
+      "2: Dissatisfied. The patient appears frustrated, with their main concerns not adequately addressed or the doctor seeming dismissive or overly clinical.",
+      "3: Neutral. The patient seems okay with the consultation but unremarkable—the doctor did their job with no particular sense of personal care or connection.",
+      "4: Satisfied. The patient appears to feel heard and comfortable with the direction of the consultation, the doctor having listened and explained clearly.",
+      "5: Very Satisfied. The patient seems deeply understood and cared for, with the doctor's empathy and expertise providing clear relief and confidence."
+    ]
+  }
+]
