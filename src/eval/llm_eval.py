@@ -204,12 +204,6 @@ def main(args):
                 elif eval_target in ["Realism_w_Profile"]:
                     persona_info = PATIENT_PERSONA_TEMPLATE.format(personality=persona_prompt["Personality"], cefr=persona_prompt["CEFR"], memory_recall_level=persona_prompt["Recall_level"], dazed_level=persona_prompt["Dazed_level"])
                     user_prompt = user_prompt_template_w_persona.format(conversation=conversation, rubric=score_rubric, profile=persona_info)
-                elif eval_target in ["Overall"]:
-                    if profile["diagnosis"] == "Urinary tract infection":
-                        profile_information = PATIENT_PROFILE_TEMPLATE_UTI.format(**profile)
-                    else:
-                        profile_information = PATIENT_PROFILE_TEMPLATE.format(**profile)
-                    user_prompt = user_prompt_template_w_profile.format(conversation=conversation, rubric=score_rubric, profile=profile_information)
                 else:
                     raise NotImplementedError
 
