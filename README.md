@@ -145,14 +145,14 @@ Evaluate generated dialogues for persona fidelity, profile consistency, or diffe
 cd src
 python ./eval/llm_eval.py \
     --trg_exp_name "${trg_exp_name}"  \
-    --moderator gemini-2.5-flash  \
-    --moderator_api_type genai  \
+    --evaluator gemini-2.5-flash  \
+    --evaluator_api_type genai  \
     --eval_persona_quality  
 ```
 **Flags**:
+- `--eval_ddx`: Evaluate differential diagnosis.
 - `--eval_persona_quality`: Evaluate persona fidelity.
 - `--eval_profile_consistency`: Evaluate profile consistency/coverage.
-- `--eval_ddx`: Evaluate differential diagnosis.
 
 ### Sentence-level evaluation 
 Evaluate generated dialogues at the sentence level:
@@ -160,9 +160,9 @@ Evaluate generated dialogues at the sentence level:
 cd src
 python ./eval/llm_eval_NLI_batch.py \
     --trg_exp_name "${trg_exp_name}" \
-    --moderator gemini-2.5-flash \
+    --evaluator gemini-2.5-flash \
     --eval_target all \
-    --moderator_api_type genai
+    --evaluator_api_type genai
 ```
 
 <br />
